@@ -43,8 +43,8 @@ const createNote = async (req, res) => {
 
 const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find({
-            user: req.user._id
+        const notes = await Notes.find({
+            user: req.user.id
         });
 
         return res.status(200).json(
@@ -56,14 +56,12 @@ const getNotes = async (req, res) => {
         );
 
     } catch (error) {
-        return res.status(
-            error.statusCode || 500
-        ).json(
-            new ApiError(
-                error.statusCode || 500,
-                error.message || "Unable to fetch notes"
-            )
-        );
+          console.log("GET NOTES ERROR:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
 };
 
@@ -74,7 +72,7 @@ const updateNotes = async (req,res)=>{
           throw new ApiError(400,"all fields are req")
       }
       // Find note + make sure it belongs to logged-in user
-      const notes=await Notes.findByOneAndUpdate({
+      const notes=await Notes.findByIdAndUpdate({
           _id:req.params.id,
           user:req.user.id,},
           {
@@ -95,7 +93,14 @@ const updateNotes = async (req,res)=>{
             )
       )
   } catch (error) {
-    throw new ApiError(400,"updation failure")
+    console.log("UPDATE ERROR:", error);
+
+        return res.status(
+            error.statusCode || 500
+        ).json({
+            success: false,
+            message: error.message
+        });
     
   }
 }
@@ -104,7 +109,7 @@ const getNoteById = async (req, res) => {
     try {
         const note = await Note.findOne({
             _id: req.params.id,
-            user: req.user._id
+            user: req.user.id
         });
 
         if (!note) {

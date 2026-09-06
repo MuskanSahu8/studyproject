@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { ApiResponse } from "../utils/ApiResponse.js";
 const signup = async (req, res) => {
     try {
-        const { name, email, password } = req.body();
+        const { name, email, password } = req.body;
         if (!name || !email || !password) {
             throw new ApiError(400, "all fields are req")
         }
@@ -58,10 +58,10 @@ const login = async (req, res) => {
 
             process.env.SECRET,
             {
-                expiresIn: "2d"
+                expiresIn: "1d"
             })
         //cookie
-        res.cookie("token", token,{
+        res.cookie("token", token, {
             httpOnly: true,
             secure: false
         })
@@ -80,6 +80,34 @@ const login = async (req, res) => {
         })
     }
 }
+const getUser = async (req, res) => {
+    try {
+        res.status(200).json({
+            message: "user authorized successfully",
+            user: req.user
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: error.message
+        });
+    }
+}
+const logout = async (req, res) => {
+    try {
+        res.clearCookie("token",{
+            httpOnly:true,
+            secure:false
+        })
+        res.status(200).json({
+            message: "logout successfully"
+        })
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+
+}
 
 
-export { signup, login }
+export { signup, login, getUser,logout }
