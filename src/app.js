@@ -3,10 +3,14 @@ import cookieParser from "cookie-parser"
 import userRouter from "./route/user.route.js"
 import notesRouter from "./route/notes.route.js"
 import todoRouter from "./route/todo.route.js"
+import videoRouter from "./route/video.route.js"
+
 const app=express()
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/user",userRouter)
 app.use("/api/notes",notesRouter)
 app.use("/api/todo",todoRouter)
+app.use("/api/video", videoRouter);
+
 export default app;
