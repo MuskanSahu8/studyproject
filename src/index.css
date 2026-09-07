@@ -160,3 +160,569 @@ a {
   color: #666;
   line-height: 1.5;
 }
+/* TABLET */
+
+@media (max-width: 1000px) {
+
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .hero {
+    padding: 60px 5%;
+  }
+
+  .hero h1 {
+    font-size: 50px;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 650px) {
+
+  .navbar {
+    height: auto;
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .nav-buttons {
+    gap: 8px;
+  }
+
+  .hero {
+    padding: 50px 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero-description {
+    margin: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 350px;
+  }
+
+  .features {
+    padding: 70px 20px;
+  }
+
+  .features-heading h2 {
+    font-size: 36px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card {
+    text-align: center;
+  }
+
+  .feature-icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 40px 6%;
+  background: #f5f7fb;
+  box-sizing: border-box;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: #171717;
+}
+
+.dashboard-header p {
+  margin: 8px 0 0;
+  color: #777;
+  font-size: 15px;
+}
+
+
+/* =========================
+   DASHBOARD GRID
+========================= */
+
+.dashboard-grid {
+  display: grid;
+
+  grid-template-columns: 1.3fr 1fr;
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+
+/* =========================
+   ALL DASHBOARD CARDS
+========================= */
+
+.time-widget,
+.stopwatch,
+.alarm,
+.reminder {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 28px;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  border: 1px solid #e9eaf0;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 8px 25px rgba(20, 20, 40, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.time-widget:hover,
+.stopwatch:hover,
+.alarm:hover,
+.reminder:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(20, 20, 40, 0.08);
+}
+
+
+/* =========================
+   CLOCK
+========================= */
+
+.time-widget {
+  min-height: 250px;
+}
+
+.time-label {
+  margin: 0;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
+
+  color: #8a8a95;
+}
+
+.time-widget h2 {
+  margin: 12px 0 5px;
+
+  font-size: 52px;
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  color: #171717;
+}
+
+.time-widget .date {
+  margin: 10px 0 0;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+/* =========================
+   CLOCK ACTIONS
+========================= */
+
+.time-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 12px;
+
+  margin-top: 30px;
+}
+
+.time-actions button {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 15px 8px;
+
+  border: 1px solid #eeeeF2;
+
+  border-radius: 15px;
+
+  background: #f8f9fc;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.time-actions button:hover {
+  background: #f0efff;
+
+  border-color: #dcd9ff;
+
+  transform: translateY(-3px);
+}
+
+.time-actions span {
+  font-size: 24px;
+}
+
+.time-actions small {
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #555;
+}
+
+
+/* =========================
+   CARD HEADINGS
+========================= */
+
+.stopwatch h2,
+.alarm h2,
+.reminder h2 {
+  margin-top: 0;
+
+  margin-bottom: 20px;
+
+  font-size: 22px;
+}
+
+
+/* =========================
+   STOPWATCH
+========================= */
+
+.stopwatch-time {
+  padding: 25px;
+
+  text-align: center;
+
+  font-size: 42px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  background: #f7f7fb;
+
+  border-radius: 16px;
+
+  margin-bottom: 20px;
+}
+
+.stopwatch-buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+.stopwatch-buttons button {
+  flex: 1;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #171717;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.stopwatch-buttons button:hover {
+  opacity: 0.85;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .time-widget {
+    min-height: auto;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .dashboard {
+    padding: 25px 18px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 27px;
+  }
+
+  .time-widget h2 {
+    font-size: 40px;
+  }
+
+  .time-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stopwatch-time {
+    font-size: 32px;
+  }
+}
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e9eaf0;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 8px 25px rgba(20, 20, 40, 0.05);
+}
+
+
+/* Header */
+
+.calendar-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+
+  font-size: 21px;
+}
+
+.calendar-header button {
+  width: 36px;
+  height: 36px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #f4f5f9;
+
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.calendar-header button:hover {
+  background: #e9eaf0;
+}
+
+
+/* Weekdays */
+
+.calendar-weekdays {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  margin-bottom: 10px;
+}
+
+.calendar-weekdays span {
+  text-align: center;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+
+/* Dates */
+
+.calendar-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 6px;
+}
+
+.calendar-day {
+  height: 42px;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.calendar-day:hover {
+  background: #f0efff;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .calendar {
+    padding: 20px;
+  }
+
+  .calendar-day {
+    height: 38px;
+  }
+
+}
+/* =========================
+   TODAY
+========================= */
+
+.calendar-day.today {
+  font-weight: 700;
+  border: 2px solid #6c63ff;
+}
+
+
+/* =========================
+   SELECTED DATE
+========================= */
+
+.calendar-day.selected {
+  background: #171717;
+  color: white;
+  font-weight: 700;
+}
+
+
+/* =========================
+   SELECTED DATE INFO
+========================= */
+
+.selected-date {
+  margin-top: 25px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.selected-date p {
+  margin: 0 0 5px;
+
+  font-size: 12px;
+
+  color: #999;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.selected-date h3 {
+  margin: 0;
+
+  font-size: 16px;
+
+  color: #222;
+}

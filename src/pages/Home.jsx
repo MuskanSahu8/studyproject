@@ -49,29 +49,21 @@ const Home = () => {
 
   return (
     <>
-
       <main>
-
         <Hero />
-
         <section className="features">
-
           <p className="section-small">
             EVERYTHING YOU NEED
           </p>
-
           <h2>
             One place for
             <span> everything.</span>
           </h2>
-
           <p className="section-desc">
             Simple tools designed to help you learn,
             organize and stay focused.
           </p>
-
           <div className="feature-grid">
-
             {features.map((feature, index) => (
               <FeatureCard
                 key={index}
@@ -80,11 +72,8 @@ const Home = () => {
                 desc={feature.desc}
               />
             ))}
-
           </div>
-
         </section>
-
       </main>
     </>
   );
