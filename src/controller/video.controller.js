@@ -4,10 +4,10 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 const createVideo = async (req, res) => {
     try {
-        const { title, url,description } = req.body;
+        const { title, url,desc} = req.body;
         const { notesId } = req.params;
 
-        if (!title || !url || !notesId || !description) {
+        if (!title || !url || !notesId || !desc) {
             throw new ApiError(400, "all fields are req")
         }
         const notes = await Notes.findOne({
@@ -19,7 +19,7 @@ const createVideo = async (req, res) => {
         }
         //create obj
         const video = await Video.create({
-            title, url,description ,notes: notesId, user: req.user._id
+            title, url,desc ,notes: notesId, user: req.user._id
         })
         return res.status(200).json(
             new ApiResponse(200, todo, "video added to notes")

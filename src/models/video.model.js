@@ -18,7 +18,7 @@ const videoSchema = new mongoose.Schema({
         ref: "Notes",
         required: true
     },
-    description:{
+    desc:{
     type: String,
     required: true,
 }
