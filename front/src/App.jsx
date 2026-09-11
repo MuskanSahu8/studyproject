@@ -1,27 +1,31 @@
-import React from 'react'
-import Navbar from './components/Navbar'
+
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
-import About from './pages/About'
+import{Routes,Route } from 'react-router-dom'
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import ProtectedRoute from './ProtectedRoute';
+import Logout from './pages/Logout';
 
-import { BrowserRouter, Routes,Route } from 'react-router-dom'
-
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
-    <Navbar />
     <Routes>
-      <Route path="/" element={<Home />}/>
-      <Route path="/dashboard" element ={<Dashboard />}/>
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/about" element={<About />}/>
-        
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+      path='/login'
+      element={<Login />}/>
+      <Route path="/signup" element={<Signup />}/>
+      <Route
+      path="/logout" element={<Logout />} />
     </Routes>
-    </BrowserRouter>
-  )
+  );
 }
-
-export default App
+export default App;
