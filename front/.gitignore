@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Secrets & Config
+.env
+.env.local
+
+# Build outputs
+build/
+dist/
+>>>>>>> 74d21778ea0cbac19c37f2fa66c2e07b64d7504c

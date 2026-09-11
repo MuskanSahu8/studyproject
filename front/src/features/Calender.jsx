@@ -1,13 +1,10 @@
 import { useState } from "react";
 
-const Calendar = ({
-  selectedDate,
-  setSelectedDate,
-  reminders = []
-}) => {
+const Calendar = ({selectedDate,setSelectedDate,reminders}) => {
   const today = new Date();
 
   const [currentDate, setCurrentDate] = useState(today);
+ 
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -27,8 +24,7 @@ const Calendar = ({
       year: "numeric",
     }
   );
-
-  // Format date as YYYY-MM-DD
+    // Format date as YYYY-MM-DD
   const formatDate = (date) => {
     const year = date.getFullYear();
 
@@ -43,7 +39,7 @@ const Calendar = ({
     return `${year}-${month}-${day}`;
   };
 
-  // Check today
+  // Check if date is today
   const isToday = (day) => {
     return (
       day === today.getDate() &&
@@ -61,8 +57,7 @@ const Calendar = ({
       year === selectedDate.getFullYear()
     );
   };
-
-  // Check if date has reminder
+   // Check if date has reminder
   const hasReminder = (day) => {
     const date = new Date(year, month, day);
 
@@ -89,12 +84,14 @@ const Calendar = ({
 
   // Select date
   const selectDate = (day) => {
-    setSelectedDate(new Date(year, month, day));
+    setSelectedDate(
+      new Date(year, month, day)
+    );
   };
 
   const days = [];
 
-  // Empty spaces before first day
+  // Empty spaces
   for (let i = 0; i < firstDay; i++) {
     days.push(
       <div
@@ -106,10 +103,13 @@ const Calendar = ({
 
   // Dates
   for (let day = 1; day <= daysInMonth; day++) {
+
     days.push(
+
       <button
         key={day}
         onClick={() => selectDate(day)}
+
         className={`
           calendar-day
           ${isToday(day) ? "today" : ""}
@@ -117,11 +117,8 @@ const Calendar = ({
         `}
       >
         {day}
-
-        {hasReminder(day) && (
-          <span className="reminder-dot"></span>
-        )}
       </button>
+
     );
   }
 
@@ -129,6 +126,7 @@ const Calendar = ({
     <div className="calendar">
 
       {/* Header */}
+
       <div className="calendar-header">
 
         <button onClick={previousMonth}>
@@ -143,8 +141,11 @@ const Calendar = ({
 
       </div>
 
+
       {/* Weekdays */}
+
       <div className="calendar-weekdays">
+
         <span>Sun</span>
         <span>Mon</span>
         <span>Tue</span>
@@ -152,15 +153,21 @@ const Calendar = ({
         <span>Thu</span>
         <span>Fri</span>
         <span>Sat</span>
+
       </div>
 
+
       {/* Calendar */}
+
       <div className="calendar-grid">
         {days}
       </div>
 
+
       {/* Selected date */}
+
       {selectedDate && (
+
         <div className="selected-date">
 
           <p>Selected date</p>
@@ -178,6 +185,7 @@ const Calendar = ({
           </h3>
 
         </div>
+
       )}
 
     </div>
