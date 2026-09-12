@@ -1,0 +1,88 @@
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+  min-height: 100vh;
+  padding: 40px 7%;
+  background: #f8f9fc;
+}
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.dashboard-card,
+.dashboard-wide-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-card {
+  min-height: 300px;
+}
+
+.dashboard-wide-card {
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   CARD HEADINGS
+========================= */
+
+.dashboard-card h2,
+.dashboard-wide-card h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  .dashboard {
+    padding: 25px 5%;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
+}

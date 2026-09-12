@@ -1,9 +1,6 @@
 import { useState } from "react";
 
-const Calendar = ({
-     selectedDate,
-  setSelectedDate}
-) => {
+const Calendar = ({selectedDate,setSelectedDate,reminders}) => {
   const today = new Date();
 
   const [currentDate, setCurrentDate] = useState(today);
@@ -27,6 +24,20 @@ const Calendar = ({
       year: "numeric",
     }
   );
+    // Format date as YYYY-MM-DD
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+
+    const month = String(
+      date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+      date.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
 
   // Check if date is today
   const isToday = (day) => {
@@ -44,6 +55,16 @@ const Calendar = ({
       day === selectedDate.getDate() &&
       month === selectedDate.getMonth() &&
       year === selectedDate.getFullYear()
+    );
+  };
+   // Check if date has reminder
+  const hasReminder = (day) => {
+    const date = new Date(year, month, day);
+
+    const dateString = formatDate(date);
+
+    return reminders.some(
+      (reminder) => reminder.date === dateString
     );
   };
 

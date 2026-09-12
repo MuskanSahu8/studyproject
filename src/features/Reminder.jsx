@@ -1,75 +1,172 @@
-import React, { useState,useEffect } from 'react'
-
-const Reminder = () => {
+import React, { useState, useEffect } from 'react'
+import apiClient from '../ApiClient/interceptor'
+const Reminder = ({ reminders, setReminders, selectedDate }) => {
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
     const [message, setMessage] = useState("")
-    const [reminders, setReminders] = useState([])
-
-    const addReminder = () => {
-        if (!date || !time || !message) {
-            alert("all fields are require")
-            return;
-        }
-
-        const newReminder = {
-            id: Date.now(),
-            date,
-            time, message, active: true,
-        }
-        setReminders((previousReminder) => [
-            ...previousReminder,
-            newReminder
-        ])
-        setDate("");
-        setTime("");
-        setTime("");
-    }
-    // Delete reminder
-    const deleteReminder = (id) => {
-        setReminders((previousReminders) =>
-            previousReminders.filter(
-                (reminder) => reminder.id !== id
-            )
-        );
-    };
-
-    // Check reminders
     useEffect(() => {
-        const interval = setInterval(() => {
-            const now = new Date();
+  const fetchReminders = async () => {
+    try {
+      const response = await apiClient.get("/reminders");
 
-            const currentDate = now
-                .toISOString()
-                .split("T")[0];
+      console.log("Reminders:", response.data);
 
-            const currentTime = now
-                .toTimeString()
-                .slice(0, 5);
+      setReminders(response.data.data);
+    } catch (error) {
+      console.log(
+        "Error fetching reminders:",
+        error
+      );
+    }
+  };
 
-            setReminders((previousReminders) =>
-                previousReminders.map((reminder) => {
+  fetchReminders();
+}, [setReminders]);
 
-                    if (
-                        reminder.active &&
-                        reminder.date === currentDate &&
-                        reminder.time === currentTime
-                    ) {
-                        alert(`🔔 ${reminder.message}`);
 
-                        return {
-                            ...reminder,
-                            active: false,
-                        };
-                    }
+    // Automatically use selected calendar date
+    useEffect(() => {
+        if (selectedDate) {
+            const year = selectedDate.getFullYear();
 
-                    return reminder;
-                })
-            );
-        }, 1000);
+            const month = String(
+                selectedDate.getMonth() + 1
+            ).padStart(2, "0");
 
-        return () => clearInterval(interval);
-    }, []);
+            const day = String(
+                selectedDate.getDate()
+            ).padStart(2, "0");
+
+            setDate(`${year}-${month}-${day}`);
+        }
+    }, [selectedDate]);
+
+ const addReminder = async () => {
+  if (!date || !time || !message) {
+    alert("All fields are required");
+    return;
+  }
+
+  try {
+    const response = await apiClient.post(
+      "/reminders/create",
+      {
+        date,
+        time,
+        message,
+      }
+    );
+
+    console.log("Created:", response.data);
+
+    const newReminder = response.data.data;
+
+    setReminders((previousReminders) => [
+      ...previousReminders,
+      newReminder,
+    ]);
+
+    setTime("");
+    setMessage("");
+
+  } catch (error) {
+    console.log(
+      "Create reminder error:",
+      error
+    );
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to create reminder"
+    );
+  }
+};
+    // Delete reminder
+    const deleteReminder = async (id) => {
+  try {
+    await apiClient.delete(
+      `/reminders/${id}`
+    );
+
+    setReminders((previousReminders) =>
+      previousReminders.filter(
+        (reminder) => reminder._id !== id
+      )
+    );
+
+  } catch (error) {
+    console.log(
+      "Delete reminder error:",
+      error
+    );
+  }
+};
+    // Check reminders
+// Check reminders
+useEffect(() => {
+  const interval = setInterval(async () => {
+    const now = new Date();
+
+    const currentDate =
+      now.getFullYear() +
+      "-" +
+      String(now.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(now.getDate()).padStart(2, "0");
+
+    const currentTime =
+      String(now.getHours()).padStart(2, "0") +
+      ":" +
+      String(now.getMinutes()).padStart(2, "0");
+
+    const dueReminders = reminders.filter(
+      (reminder) =>
+        reminder.active &&
+        reminder.date === currentDate &&
+        reminder.time === currentTime
+    );
+
+    for (const reminder of dueReminders) {
+      // Show notification
+      alert(`🔔 ${reminder.message}`);
+
+      try {
+        // Update MongoDB
+        await apiClient.patch(
+          `/reminders/complete/${reminder._id}`
+        );
+
+        // Update React state
+        setReminders((previousReminders) =>
+          previousReminders.map((item) =>
+            item._id === reminder._id
+              ? { ...item, active: false }
+              : item
+          )
+        );
+
+      } catch (error) {
+        console.log(
+          "Error completing reminder:",
+          error
+        );
+      }
+    }
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, [reminders, setReminders]);
+    const selectedDateString = selectedDate
+        ? `${selectedDate.getFullYear()}-${String(
+            selectedDate.getMonth() + 1
+        ).padStart(2, "0")}-${String(
+            selectedDate.getDate()
+        ).padStart(2, "0")}`
+        : "";
+
+    const filteredReminders = reminders.filter(
+        (reminder) => reminder.date === selectedDateString
+    );
 
     return (
         <div className="reminder">
@@ -105,15 +202,14 @@ const Reminder = () => {
 
             <div className="reminder-list">
 
-                {reminders.length === 0 ? (
-                    <p>No reminders set.</p>
+                {filteredReminders.length === 0 ? (
+                    <p>No reminders for this date.</p>
                 ) : (
-
-                    reminders.map((reminder) => (
+                    filteredReminders.map((reminder) => (
 
                         <div
                             className="reminder-item"
-                            key={reminder.id}
+                            key={reminder._id}
                         >
 
                             <div>
@@ -134,20 +230,14 @@ const Reminder = () => {
 
                             <button
                                 onClick={() =>
-                                    deleteReminder(reminder.id)
-                                }
-                            >
+                                    deleteReminder(reminder._id)
+                                }>
                                 Delete
                             </button>
-
                         </div>
-
                     ))
-
                 )}
-
             </div>
-
         </div>
     )
 }
