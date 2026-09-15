@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import apiClient from "../ApiClient/interceptor";
+import alarmSoundFile from "../assets/alarm.mp3";
 
 const Alarm = () => {
   const [time, setTime] = useState("");
@@ -10,15 +11,14 @@ const Alarm = () => {
   const alarmSound = useRef(null);
 
   // Create alarm sound
-  useEffect(() => {
-    alarmSound.current = new Audio("/alarm.mp3");
-    alarmSound.current.loop = true;
+useEffect(() => {
+  alarmSound.current = new Audio(alarmSoundFile);
+  alarmSound.current.loop = true;
 
-    return () => {
-      alarmSound.current?.pause();
-    };
-  }, []);
-
+  return () => {
+    alarmSound.current?.pause();
+  };
+}, []);
   // Fetch alarms from backend
   useEffect(() => {
     const fetchAlarms = async () => {

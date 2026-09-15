@@ -59,7 +59,7 @@ const Login =() => {
 
          <div className="auth-header">
         <h1>Welcome Back</h1>
-        <p>Sign in to continue to TimeMate</p>
+        <p>Sign in to continue to DeskBuddy</p>
       </div>
 
       <form onSubmit={handleSignin}>
