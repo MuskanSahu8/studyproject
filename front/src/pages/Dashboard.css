@@ -1,88 +1,163 @@
-/* =========================
-   DASHBOARD
-========================= */
-
+/* Main Dashboard */
 .dashboard {
   min-height: 100vh;
-  padding: 40px 7%;
-  background: #f8f9fc;
+  padding: 30px;
+  background: #f5f7fb;
+  color: #222;
 }
 
+
+/* ================= HEADER ================= */
+
 .dashboard-header {
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+
+  padding: 25px 30px;
+
+  background: white;
+  border-radius: 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
 }
 
 .dashboard-header h1 {
-  font-size: 36px;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
+  font-size: 30px;
 }
 
 .dashboard-header p {
-  color: #666;
-  font-size: 16px;
+  margin: 5px 0;
+  color: #777;
 }
 
 
-/* =========================
-   GRID
-========================= */
+/* Logout button */
+
+.dashboard-header button {
+  padding: 11px 20px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #667eea;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.dashboard-header button:hover {
+  background: #5568d8;
+  transform: translateY(-2px);
+}
+
+
+/* ================= GRID ================= */
 
 .dashboard-grid {
+  max-width: 1200px;
+  margin: 0 auto 25px;
+
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  margin-bottom: 25px;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
 }
 
 
-/* =========================
-   CARDS
-========================= */
-
-.dashboard-card,
-.dashboard-wide-card {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-}
+/* ================= CARD ================= */
 
 .dashboard-card {
-  min-height: 300px;
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 18px;
+
+  border: 1px solid #e8e8e8;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+
+  transition: 0.3s;
 }
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+
+/* ================= FOCUS TIMER ================= */
 
 .dashboard-wide-card {
-  margin-bottom: 25px;
+  max-width: 1200px;
+
+  margin: 0 auto 25px;
+
+  padding: 30px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  border: 1px solid #e8e8e8;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
 }
 
 
-/* =========================
-   CARD HEADINGS
-========================= */
+/* ================= RESPONSIVE ================= */
 
-.dashboard-card h2,
-.dashboard-wide-card h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
+@media (max-width: 1000px) {
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 768px) {
+@media (max-width: 650px) {
 
   .dashboard {
-    padding: 25px 5%;
+    padding: 15px;
+  }
+
+  .dashboard-header {
+    padding: 20px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
   }
 
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
-  .dashboard-header h1 {
-    font-size: 28px;
+  .dashboard-card {
+    padding: 20px;
+  }
+
+  .dashboard-wide-card {
+    padding: 20px;
   }
 
 }

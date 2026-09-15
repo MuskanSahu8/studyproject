@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../ApiClient/interceptor";
 
-const Todo = ({ tasks = [], setTasks }) => {
+const Todo = () => {
+   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [editId, setEditId] = useState(null);
   const [editTitle, setEditTitle] = useState("");
@@ -15,7 +16,7 @@ const Todo = ({ tasks = [], setTasks }) => {
         setLoading(true);
         setError("");
 
-        const response = await apiClient.get("/todos");
+        const response = await apiClient.get("/todo");
 
         console.log("Todos:", response.data);
 
@@ -46,7 +47,7 @@ const Todo = ({ tasks = [], setTasks }) => {
 
     try {
       const response = await apiClient.post(
-        "/todos/create",
+        "/todo",
         {
           title: title.trim(),
         }
@@ -77,8 +78,8 @@ const Todo = ({ tasks = [], setTasks }) => {
   // =========================
   const toggleTodo = async (id, currentStatus) => {
     try {
-      const response = await apiClient.patch(
-        `/todos/${id}`,
+      const response = await apiClient.put(
+        `/todo/${id}`,
         {
           isDone: !currentStatus,
         }
@@ -106,48 +107,47 @@ const Todo = ({ tasks = [], setTasks }) => {
   // =========================
   // EDIT TODO
   // =========================
-  const editTodo = async (id) => {
-    if (!editTitle.trim()) {
-      alert("Task cannot be empty");
-      return;
-    }
+const editTodo = async (id) => {
+  if (!editTitle.trim()) {
+    alert("Task cannot be empty");
+    return;
+  }
 
-    try {
-      const response = await apiClient.patch(
-        `/todos/${id}`,
-        {
-          title: editTitle.trim(),
-        }
-      );
+  try {
+    // Find the current todo
+    const currentTodo = tasks.find((todo) => todo._id === id);
 
-      const updatedTodo = response.data.data;
+    const response = await apiClient.put(`/todo/${id}`, {
+      title: editTitle.trim(),
+      isDone: currentTodo.isDone
+    });
 
-      setTasks((previousTasks) =>
-        previousTasks.map((todo) =>
-          todo._id === id
-            ? updatedTodo
-            : todo
-        )
-      );
+    const updatedTodo = response.data.data;
 
-      setEditId(null);
-      setEditTitle("");
-    } catch (error) {
-      console.log("Edit Todo error:", error);
+    setTasks((previousTasks) =>
+      previousTasks.map((todo) =>
+        todo._id === id ? updatedTodo : todo
+      )
+    );
 
-      alert(
-        error.response?.data?.message ||
-          "Failed to edit todo"
-      );
-    }
-  };
+    setEditId(null);
+    setEditTitle("");
 
+  } catch (error) {
+    console.log("Edit Todo error:", error);
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to edit todo"
+    );
+  }
+};
   // =========================
   // DELETE TODO
   // =========================
   const deleteTask = async (id) => {
     try {
-      await apiClient.delete(`/todos/${id}`);
+      await apiClient.delete(`/todo/${id}`);
 
       setTasks((previousTasks) =>
         previousTasks.filter(
@@ -181,7 +181,7 @@ const Todo = ({ tasks = [], setTasks }) => {
       await Promise.all(
         completedTasks.map((todo) =>
           apiClient.delete(
-            `/todos/${todo._id}`
+            `/todo/${todo._id}`
           )
         )
       );

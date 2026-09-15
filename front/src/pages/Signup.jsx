@@ -62,7 +62,7 @@ const Signup = () => {
         
           <div className="auth-header">
         <h1>Create Account</h1>
-        <p>Start managing your time with TimeMate</p>
+        <p>Start managing your time with DeskBuddy</p>
       </div>
 
        <form onSubmit={handleSignup}>

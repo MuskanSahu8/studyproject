@@ -7,19 +7,20 @@ import FocusTimer from "../features/Focus";
 import Clock from "../features/Clock";
 import "./Dashboard.css";
 import Todo from "../features/Todo";
-import Login from "./Login";
-import Signup from "./Signup";
 import Logout from "./Logout";
 import { useAuth } from "../contextApi/AuthContext";
+import { useNavigate } from "react-router-dom";
+import Note from "../features/Note";
 
 
-const Dashboard = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const [reminders, setReminders] = useState([]);
-
-  const [tasks, setTasks] = useState([]);
-
+const Dashboard = ({
+  reminders,
+  setReminders,
+  selectedDate,
+  setSelectedDate
+}) => {
+  const navigate = useNavigate();
   const { user, loading } = useAuth();
 
   // Authentication loading
@@ -63,14 +64,13 @@ const Dashboard = () => {
           <Clock />
         </div>
 
-
         <div className="dashboard-card">
 
-          <Todo
-            tasks={tasks}
-            setTasks={setTasks}
-          />
-
+          <Todo />
+          <button className="open-btn"
+            onClick={() => navigate("/todo")}>
+            open Todo
+          </button>
         </div>
 
 
@@ -79,20 +79,22 @@ const Dashboard = () => {
           <Calendar
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            reminders={reminders}
           />
 
         </div>
 
       </div>
 
-
-      {/* Alarm + Reminder */}
-
       <div className="dashboard-grid">
 
         <div className="dashboard-card">
 
           <Alarm />
+           <button className="open-btn"
+            onClick={() => navigate("/alarm")}>
+            open Alarms
+          </button>
 
         </div>
 
@@ -104,6 +106,10 @@ const Dashboard = () => {
             setReminders={setReminders}
             selectedDate={selectedDate}
           />
+           <button className="open-btn"
+            onClick={() => navigate("/reminder")}>
+            open Reminders
+          </button>
 
         </div>
 
@@ -114,8 +120,15 @@ const Dashboard = () => {
 
       <div className="dashboard-wide-card">
 
-        <FocusTimer />
+        <Stopwatch />
 
+      </div>
+      <div className="dashboard-wide-card">
+        <Note />
+         <button className="open-btn"
+            onClick={() => navigate("/note")}>
+            open Notes
+          </button>
       </div>
 
     </div>
