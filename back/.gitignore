@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+client/node_modules/
+
+# Secrets & Config
+.env
+.env.local
+
+# Build outputs
+build/
+dist/
