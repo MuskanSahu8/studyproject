@@ -11,12 +11,12 @@ import alarmRoutes from "./route/alarm.route.js";
 const app=express()
 
 app.use(cors({  
-    origin: "https://studyproject-txhx-omega.vercel.app/",
+    origin: "https://studyproject-txhx-omega.vercel.app",
     credentials: true,}))
 app.use(express.json());
 app.use(cookieParser());
 app.get("/", (req, res) => {
-    res.send("StudyHub Backend is running!");
+    res.send("deskBuddy Backend is running!");
 });
 app.use("/api/user",userRouter)
 app.use("/api/note",notesRouter)
