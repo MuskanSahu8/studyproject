@@ -9,11 +9,15 @@ import reminderRoutes from "./route/reminder.route.js"
 import alarmRoutes from "./route/alarm.route.js";
 
 const app=express()
+
 app.use(cors({  
-    origin: "http://localhost:5173",
+    origin: "https://studyproject-txhx-omega.vercel.app/",
     credentials: true,}))
 app.use(express.json());
 app.use(cookieParser());
+app.get("/", (req, res) => {
+    res.send("StudyHub Backend is running!");
+});
 app.use("/api/user",userRouter)
 app.use("/api/note",notesRouter)
 app.use("/api/todo",todoRouter)
