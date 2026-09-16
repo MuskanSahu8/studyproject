@@ -27,10 +27,6 @@ const Hero = () => {
           <Link to="/signup" className="primary-btn">
             Get Started
           </Link>
-
-          <Link to="/dashboard" className="secondary-btn">
-            Explore Dashboard →
-          </Link>
         </div>
 
       </div>
