@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://studyproject-8lvj.onrender.com/api",
   withCredentials: true,
 });
 
