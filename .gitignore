@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-=======
-# Dependencies
 node_modules/
-client/node_modules/
-
-# Secrets & Config
-.env
-.env.local
-
-# Build outputs
-build/
 dist/
->>>>>>> 74d21778ea0cbac19c37f2fa66c2e07b64d7504c
+.env
