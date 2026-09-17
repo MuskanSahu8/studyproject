@@ -35,7 +35,7 @@ const Signup = () => {
       })
       console.log(response.data.data);
       alert("sign up successfully")
-      navigate("/dashboard");
+      navigate("/login");
 
     }catch(error){
        console.log("Signup error:", error);
