@@ -11,7 +11,7 @@ import alarmRoutes from "./route/alarm.route.js";
 const app=express()
 
 app.use(cors({  
-    origin: "https://studyproject-txhx-omega.vercel.app",
+    origin: "https://studyproject-seven.vercel.app",
     credentials: true,}))
 app.use(express.json());
 app.use(cookieParser());
